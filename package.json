@@ -4,7 +4,7 @@
   "description": "Project 3",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "license": "ISC",
   "dependencies": {
