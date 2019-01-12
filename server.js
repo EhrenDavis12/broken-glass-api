@@ -1,10 +1,15 @@
 require("dotenv").config();
 var express = require("express");
-
 var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 3001;
+
+var cors = require("cors");
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+app.use(cors(corsOptions));
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -13,6 +18,7 @@ app.use(express.static("public"));
 
 // Routes
 require("./routes/itemApiRoutes")(app);
+require("./routes/sampleAuthRouts")(app);
 
 var syncOptions = { force: true };
 
