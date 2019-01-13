@@ -13,6 +13,7 @@ app.use(express.static("public"));
 
 // Routes
 require("./routes/itemApiRoutes")(app);
+require("./routes/willExampleRoutes")(app);
 
 var syncOptions = { force: true };
 

@@ -1,11 +1,17 @@
 var db = require("../models");
 
+
 module.exports = function (app) {
 
-  app.get("/api/v1/items/all", function (req, res) {
+  app.get("/api/v1/reviews/:companyid", function (req, res) {
     try {
-      db.Item.findAll({}).then(function (dbItem) {
-        res.status(200).json(dbItem);
+      db.Review.findAll({
+        where:{
+          companyid: req.params.companyid
+        }
+      }).then(function (dbReview) {
+        console.log(dbReview);
+        res.status(200).json(dbReview);
       });
     } catch (err) {
       res.status(400).json("Invalid request");
@@ -66,6 +72,27 @@ module.exports = function (app) {
       res.status(400).json("Invalid request");
     }
   });
+
+  //our new post. used to be: /api/v1/items
+
+  app.post("/api/v1/review", function (req, res) {
+    try {
+      //delete req.body.uuid;
+      //need to check company, job,pay tables. 
+      
+      db.Review.create({
+
+      }).then(function (dbReview) {
+        res.status(200).json(dbReview);
+      }).catch(function (err) {
+        console.log(err.message);
+        res.status(400).json(err.message);
+      });
+    } catch (err) {
+      res.status(400).json("Invalid request");
+    }
+  });
+  //end new post
 
   app.post("/api/v1/items", function (req, res) {
     try {
