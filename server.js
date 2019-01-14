@@ -7,7 +7,7 @@ var PORT = process.env.PORT || 3001;
 
 var cors = require("cors");
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: process.env.corsOptions || "http://localhost:3000"
 };
 app.use(cors(corsOptions));
 
