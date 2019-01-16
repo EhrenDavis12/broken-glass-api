@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS exampledb;
-CREATE DATABASE exampledb;
+DROP DATABASE IF EXISTS broken_glassdb;
+CREATE DATABASE broken_glassdb;
 
-DROP DATABASE IF EXISTS testdb;
-CREATE DATABASE testdb;

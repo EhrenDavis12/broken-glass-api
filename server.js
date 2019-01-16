@@ -42,7 +42,11 @@ app.use(express.static("public"));
 
 // Routes
 require("./routes/itemApiRoutes")(app);
+
+require("./routes/willExampleRoutes")(app);
+
 require("./routes/sampleAuthRouts")(app, checkJwt);
+
 
 const syncOptions = { force: true };
 

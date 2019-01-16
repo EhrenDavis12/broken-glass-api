@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "dude",
-    "database": "exampledb",
+    "database": "broken_glassdb",
     "host": "localhost",
     "dialect": "mysql"
   },
