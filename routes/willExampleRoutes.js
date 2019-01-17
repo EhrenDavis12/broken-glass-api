@@ -7,31 +7,26 @@ module.exports = function(app) {
     try {
       const comVal = new ComVal();
       res.json(comVal.basicMeg());
-      //res.json("Hello from a public API");
     } catch (err) {
       res.status(400).json("Invalid request");
     }
   });
 
   //start review post
-  app.post("/api/v1/testreview/:id", function (req, res) {
+  app.post("/api/v1/testreview", function (req, res) {
     try {
-     // delete req.body.uuid;
      const comVal = new ComVal();
-     console.log("params: " + req.params.id);
-     const msg = comVal.companyCheck(req.params.id)
+     console.log("params: " + req.body.id);
+     const msg = comVal.companyCheck(req.body,res, comVal.insertCompany);
      res.json(msg);
-     /*
-      db.Item.create(req.body).then(function (dbItem) {
-        res.status(200).json(dbItem);
-      }).catch(function (err) {
-        console.log(err.message);
-        res.status(400).json(err.message);
-      });
-      */
     } catch (err) {
+      console.log(err);
+      
       res.status(400).json("Invalid request");
     }
+
+
+
   });
 
   //end review post
