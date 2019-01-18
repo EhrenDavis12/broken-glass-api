@@ -1,4 +1,4 @@
-const { checkJwt, checkRole, checkScope } = require("./auth0/auth0");
+const { checkJwt, checkRole, checkScope, getUserID } = require("./auth0/auth0");
 
 module.exports = function(app) {
   app.get("/api/v1/public", function(req, res) {
@@ -30,7 +30,8 @@ module.exports = function(app) {
 
   app.get("/api/v1/admin", checkJwt, checkRole("admin"), function(req, res) {
     try {
-      res.status(200).json("Hello from an admin API");
+      console.log(`user id: ${getUserID(req)}`);
+      res.status(200).json(`Hello from an admin API`);
     } catch (err) {
       res.status(400).json("Invalid request");
     }
