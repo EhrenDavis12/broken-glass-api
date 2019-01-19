@@ -46,7 +46,7 @@ module.exports = function (sequelize, DataTypes) {
 
 		Company.associate = function(models){
 			Company.hasMany (models.Review, {
-				as: "companyId"
+				as: "CompanyId"
 			});
 		};
 

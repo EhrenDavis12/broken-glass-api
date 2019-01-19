@@ -12,6 +12,8 @@ module.exports = function(app) {
     }
   });
 
+
+
   //start review post
   app.post("/api/v1/testreview", function (req, res) {
     try {
@@ -24,12 +26,11 @@ module.exports = function(app) {
       
       res.status(400).json("Invalid request");
     }
-
-
-
   });
-
   //end review post
+
+
+
 
   //start job get
   app.get("/api/v1/jobs", function(req, res) {
@@ -46,6 +47,10 @@ module.exports = function(app) {
   });
   //end job get
 
+
+
+
+
   //start payType
   app.get("/api/v1/pay", function(req, res) {
     try {
@@ -60,6 +65,54 @@ module.exports = function(app) {
     }
   });
   //end payType
+
+
+
+
+
+  //start get all Reviews
+  app.get("/api/v1/allreviews/:uuid", function(req, res) {
+    try {
+      //start query
+
+      db.Review.findAll({
+        where:{
+          CompanyId: req.params.uuid
+        }
+      }).then(function (jobs) {
+        res.json(jobs);
+      });
+      //end query
+    } catch (err) {
+      console.log(err);
+      res.status(400).json("Invalid request from: jobs");
+    }
+  });
+  //end get all Reviews
+
+
+
+
+
+  //start get 1 Review
+  app.get("/api/v1/onereview/:uuid", function(req, res) {
+    try {
+      //start query
+
+      db.Review.findOne({
+        where:{
+          CompanyId: req.params.uuid
+        }
+      }).then(function (jobs) {
+        res.json(jobs);
+      });
+      //end query
+    } catch (err) {
+      console.log(err);
+      res.status(400).json("Invalid request from: jobs");
+    }
+  });
+//end get 1 review
   
 
 };
