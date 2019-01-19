@@ -7,48 +7,11 @@ const ComVal = function() {
       return "test1 is working!";
     };
 
-    this.companyCheck = (body,pres, insertCompany) => {
-        //1. query company id to see if it exists. 
-        //if it exists return true
-        db.Company.findAll({
-          where:{
-            id: body.googleMapsId 
-          }
-        }).then(function (res) {
-          console.log("results from query: ");
-          // console.log(res[0].id);
-         
-          if(res.length>=0){
-            console.log("already exist");
-            return true;
-          }
-          else{
-            //in this case we need to add the company data to our database
-           
-           db.Company.create({
-            id: body.id,
-            googleMapId: body.company.googleMapId,
-            companyName: body.company.category,
-            averageRating: body.company.averageRating,
-            reviewCount: body.company.reviewCount,
-
-           }).then(function (res1){
-              insertCompany(body, res)
-           })
-
-           return false;
-          }
-
-        });
-        // return "companyCheck is working!" ;
-
-    };
-
-    this.insertReview= (body, res) => {
+    insertReview= (body, res) => {
 
         
       db.Review.create({
-        uuid: body.review.uuid,
+        // uuid: body.review.uuid,
         userId: body.review.userId,
         shiftPayComent: body.review.shiftPayComent,
         shiftPayRating: body.review.shiftPayRating,
@@ -66,10 +29,51 @@ const ComVal = function() {
 
 
        }).then(function (res1){
-          res.status(200).json("Review has been added!")
+
        })
 
-    }; //end comapny insert
+    }; 
+
+    this.companyCheck = (body,pres) => {
+
+        db.Company.findAll({
+          where:{
+            googleMapId: body.company.googleMapId 
+          }
+        }).then(function (res) {
+          console.log("results from query: ");
+          console.log(res.length);
+         
+          if(res.length>=1){
+            console.log("already exist");
+            insertReview(body, pres);
+            return true;
+          }
+          else{
+            //in this case we need to add the company data to our database
+           
+           db.Company.create({
+            id: body.company.id,
+            googleMapId: body.company.googleMapId,
+            companyName: body.company.category,
+            averageRating: body.company.averageRating,
+            reviewCount: body.company.reviewCount,
+
+           }).then(function (pres){
+              insertReview(body, pres);
+              console.log("company has been added!");
+              
+           })
+
+           return false;
+          }
+
+        });
+
+
+    };
+
+ 
 
   };
   
