@@ -36,3 +36,10 @@ module.exports.checkRole = role => {
     }
   };
 };
+
+module.exports.getUserID = req => {
+  if (req.user) {
+    return req.user.sub;
+  }
+  return "";
+};
