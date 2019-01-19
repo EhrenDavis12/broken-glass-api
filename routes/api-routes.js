@@ -99,7 +99,8 @@ module.exports = function(app) {
     try {
       //start query
 
-      db.Review.findOne({
+      db.Review.findAll({
+        limit: 1,
         where:{
           CompanyId: req.params.uuid
         }
@@ -113,6 +114,47 @@ module.exports = function(app) {
     }
   });
 //end get 1 review
+
+
+
+//Update Review here 
+
+
+app.put("/api/v1/updatereview", function(req, res) {
+  console.log(req.body)
+  try {
+    //start query
+
+    db.Review.update(
+      {
+        shiftPayComent: req.body.review.shiftPayComent,
+        shiftPayRating: req.body.review.shiftPayRating,
+        managementComment: req.body.review.managementComment,
+        managementRating: req.body.review.managementRating,
+        busyComment: req.body.review.busyComment,
+        busyRating: req.body.review.busyRating,
+        customerComment: req.body.review.customerComment,
+        customerRating: req.body.review.customerRating,
+        overallComment: req.body.review.overallComment,
+        overallRating: req.body.review.overallRating,
+      },
+      {
+      where:{
+        uuid: req.body.review.uuid
+      }
+    }).then(function (jobs) {
+      res.json(jobs);
+    });
+    //end query
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Invalid request from: update");
+  }
+
+});
+
+
+//end update review
   
 
 };
