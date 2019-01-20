@@ -32,7 +32,7 @@ const ComVal = function () {
 
     db.Company.findAll({
       where: {
-        googleMapId: body.company.googleMapId
+        id: body.company.id
       }
     }).then(function (res) {
       console.log("results from query: ");
@@ -48,7 +48,6 @@ const ComVal = function () {
 
         db.Company.create({
           id: body.company.id,
-          googleMapId: body.company.googleMapId,
           companyName: body.company.category,
           averageRating: body.company.averageRating,
           reviewCount: body.company.reviewCount,
