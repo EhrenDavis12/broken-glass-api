@@ -71,13 +71,13 @@ module.exports = function(app) {
 
 
   //start get all Reviews
-  app.get("/api/v1/allreviews/:uuid", function(req, res) {
+  app.get("/api/v1/allreviews/:CompanyId", function(req, res) {
     try {
       //start query
 
       db.Review.findAll({
         where:{
-          CompanyId: req.params.uuid
+          CompanyId: req.params.CompanyId
         }
       }).then(function (jobs) {
         res.json(jobs);
