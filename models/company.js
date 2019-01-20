@@ -1,15 +1,11 @@
 module.exports = function (sequelize, DataTypes) {
 
 	var Company = sequelize.define("Company", {
+	
 		id: {
-			type: DataTypes.UUID,
-			defaultValue: DataTypes.UUIDV1,
-			primaryKey: true,
-			
-		},
-		googleMapId: {
 			type: DataTypes.STRING,
 			allowNull: false,
+			primaryKey: true,
 			validate: {
 				len: {
 					args: [1, 255],
