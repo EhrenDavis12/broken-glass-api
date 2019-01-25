@@ -2,6 +2,8 @@ var db = require("../models");
 
 const ComVal = require("../businessLogic/company/comapnyValidation");
 
+
+
 module.exports = function(app) {
   //start review post
   app.post("/api/v1/review", function (req, res) {
@@ -63,11 +65,18 @@ module.exports = function(app) {
   app.get("/api/v1/allreviews/:CompanyId", function(req, res) {
     try {
       //start query
+      var query = {};
+      if (req.query.JobTypeId) {
+        query.JobTypeId = req.query.JobTypeId;
+      }
+
+
 
       db.Review.findAll({
         where:{
           CompanyId: req.params.CompanyId
-        }
+        },
+        include: [db.JobType, db.PayType]
       }).then(function (jobs) {
         res.json(jobs);
       });
