@@ -76,7 +76,7 @@ module.exports = function(app) {
         where:{
           CompanyId: req.params.CompanyId
         },
-        include: [db.JobType]
+        include: [db.JobType, db.PayType]
       }).then(function (jobs) {
         res.json(jobs);
       });

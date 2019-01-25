@@ -108,23 +108,20 @@ module.exports = function (sequelize, DataTypes) {
 					allowNull: false
 				}
 			});
-		};
-
-		Review.associate = function(models){
+		
 			Review.belongsTo (models.JobType, {
 				foreignKey: {
 					allowNull: false
 				}
 			});
-		};
 
-		Review.associate = function(models){
 			Review.belongsTo (models.PayType, {
 				foreignKey: {
 					allowNull: false
 				}
 			});
-		};
+		
+	};
 
 	return Review;
 };
