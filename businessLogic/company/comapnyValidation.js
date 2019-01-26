@@ -5,12 +5,9 @@ const ComVal = function () {
     return "test1 is working!";
   };
 
-  //fuck you
-
   insertReview = (body, res) => {
 
     db.Review.create({
-      // uuid: body.review.uuid,
       userId: body.review.userId,
       shiftPayComent: body.review.shiftPayComent,
       shiftPayRating: body.review.shiftPayRating,
@@ -79,9 +76,9 @@ const ComVal = function () {
 
         db.Company.create({
           id: body.company.id,
-          companyName: body.company.category,
-          averageRating: body.company.averageRating,
-          reviewCount: body.company.reviewCount,
+          companyName: body.company.category
+          // averageRating: body.company.averageRating,
+          // reviewCount: body.company.reviewCount,
 
         }).then(function (pres) {
           insertReview(body, pres);
