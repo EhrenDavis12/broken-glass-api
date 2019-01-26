@@ -5,6 +5,8 @@ const ComVal = function () {
     return "test1 is working!";
   };
 
+  //fuck you
+
   insertReview = (body, res) => {
 
     db.Review.create({
@@ -25,7 +27,36 @@ const ComVal = function () {
       PayTypeId: body.review.PayTypeId
 
     }).then(function (res1) {
+
+      db.Review.count({
+
+        where: [{ 'CompanyId': body.company.id }]
+
+      }).then(function (countRes) {
+        //reviewCount
+        console.log(countRes);
+        //start
+        db.Company.update({
+          reviewCount: countRes
+        }, {
+          where: { id: body.company.id },
+          
+        })
+        .then(function (result) {
+          console.log(result);   
+          // result = [x] or [x, y]
+          // [x] if you're not using Postgres
+          // [x, y] if you are using Postgres
+        });
+        //ens
+        
+      }
+
+      )
+
     })
+
+
   };
 
   this.companyCheck = (body, pres) => {
