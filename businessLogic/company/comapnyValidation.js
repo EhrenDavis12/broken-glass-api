@@ -40,10 +40,21 @@ const ComVal = function () {
           
         })
         .then(function (result) {
-          console.log(result);   
-          // result = [x] or [x, y]
-          // [x] if you're not using Postgres
-          // [x, y] if you are using Postgres
+          console.log(result);
+             db.Review.sum("overallRating", {where: { companyId: body.company.id }}).then(sum=>{
+               console.log(`This is sum ${sum}`);
+               let average = sum / countRes;
+               console.log(`This is average ${average}`);
+
+               db.Company.update({
+                averageRating: average
+              }, {
+                where: { id: body.company.id },
+                
+              })
+               
+               
+             })
         });
         //ens
         
