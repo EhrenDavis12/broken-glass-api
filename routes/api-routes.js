@@ -19,6 +19,7 @@ module.exports = function(app) {
     }
   });
   //end review post
+  
 
 
 
@@ -87,6 +88,36 @@ module.exports = function(app) {
     }
   });
   //end get all Reviews
+
+
+
+
+
+
+
+  //start get all reviews from one user
+  app.get("/api/v1/alluserreviews/:userId", function(req, res) {
+    try {
+ 
+      db.Review.findAll({
+        where:{
+          userId: req.params.userId
+        }
+      }).then(function (allUserReview) {
+        res.json(allUserReview);
+        // console.log(allUserReview);
+        
+      });
+      //end query
+    } catch (err) {
+      console.log(err);
+      res.status(400).json("Invalid request from: allUserReview");
+    }
+  });
+  //end get all reviews from one user
+
+
+
 
 
 
