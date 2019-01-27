@@ -153,6 +153,33 @@ app.put("/api/v1/updatereview", function(req, res) {
 
 
 //end update review
+
+
+
+
+//get average Review 
+
+
+app.get("/api/v1/company/:uuid", function(req, res) {
+  try {
+    //start query
+    db.Company.findAll({
+      limit: 1,
+      where:{
+        id: req.params.uuid
+      }
+    }).then(function (Company) {
+      res.json(Company);
+    });
+    //end query
+  } catch (err) {
+    console.log(err);
+    res.status(400).json("Invalid request from: jobs");
+  }
+});
+
+
+//end average review
   
 
 };
