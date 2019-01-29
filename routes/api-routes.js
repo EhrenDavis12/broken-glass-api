@@ -101,7 +101,8 @@ module.exports = function(app) {
         limit: 1,
         where:{
           CompanyId: req.params.uuid
-        }
+        },
+        include: [db.JobType, db.PayType]
       }).then(function (jobs) {
         res.json(jobs);
       });
